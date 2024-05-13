@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLPKTNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BenhNhan">
+          <Key>
+            <PropertyRef Name="MaBenhNhan" />
+          </Key>
+          <Property Name="MaBenhNhan" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenBenhNhan" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tuoi" Type="int" />
+          <Property Name="Nam" Type="bit" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChiTietToaThuoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="MaThuoc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SoLuong" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LieuDung" Type="nvarchar" MaxLength="30" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenTk" Type="varchar" MaxLength="50" />
+          <Property Name="Mauk" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Thuoc">
+          <Key>
+            <PropertyRef Name="MaThuoc" />
+          </Key>
+          <Property Name="MaThuoc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenThuoc" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NuocSx" Type="nvarchar" MaxLength="20" />
+          <Property Name="DonGia" Type="nvarchar" MaxLength="50" />
+          <Property Name="HanSuDung" Type="date" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="40" />
+          <Property Name="HinhAnh" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ToaThuoc">
+          <Key>
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="MaBenhNhan" Type="nvarchar" MaxLength="50" />
+          <Property Name="BenhDuocChanDoan" Type="nvarchar" MaxLength="30" />
+          <Property Name="NgayKham" Type="date" />
+        </EntityType>
+        <Association Name="FK_ChiTietToaThuoc_Thuoc1">
+          <End Role="Thuoc" Type="Self.Thuoc" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ChiTietToaThuoc" Type="Self.ChiTietToaThuoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thuoc">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="ChiTietToaThuoc">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietToaThuoc_ToaThuoc1">
+          <End Role="ToaThuoc" Type="Self.ToaThuoc" Multiplicity="1" />
+          <End Role="ChiTietToaThuoc" Type="Self.ChiTietToaThuoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToaThuoc">
+              <PropertyRef Name="STT" />
+            </Principal>
+            <Dependent Role="ChiTietToaThuoc">
+              <PropertyRef Name="STT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToaThuoc_BenhNhan">
+          <End Role="BenhNhan" Type="Self.BenhNhan" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ToaThuoc" Type="Self.ToaThuoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BenhNhan">
+              <PropertyRef Name="MaBenhNhan" />
+            </Principal>
+            <Dependent Role="ToaThuoc">
+              <PropertyRef Name="MaBenhNhan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLPKTNModelStoreContainer">
+          <EntitySet Name="BenhNhan" EntityType="Self.BenhNhan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietToaThuoc" EntityType="Self.ChiTietToaThuoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Thuoc" EntityType="Self.Thuoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToaThuoc" EntityType="Self.ToaThuoc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChiTietToaThuoc_Thuoc1" Association="Self.FK_ChiTietToaThuoc_Thuoc1">
+            <End Role="Thuoc" EntitySet="Thuoc" />
+            <End Role="ChiTietToaThuoc" EntitySet="ChiTietToaThuoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietToaThuoc_ToaThuoc1" Association="Self.FK_ChiTietToaThuoc_ToaThuoc1">
+            <End Role="ToaThuoc" EntitySet="ToaThuoc" />
+            <End Role="ChiTietToaThuoc" EntitySet="ChiTietToaThuoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToaThuoc_BenhNhan" Association="Self.FK_ToaThuoc_BenhNhan">
+            <End Role="BenhNhan" EntitySet="BenhNhan" />
+            <End Role="ToaThuoc" EntitySet="ToaThuoc" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLPKTNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BenhNhan">
+          <Key>
+            <PropertyRef Name="MaBenhNhan" />
+          </Key>
+          <Property Name="MaBenhNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenBenhNhan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tuoi" Type="Int32" />
+          <Property Name="Nam" Type="Boolean" />
+          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ToaThuocs" Relationship="Self.fk_Mbn" FromRole="BenhNhan" ToRole="ToaThuoc" />
+        </EntityType>
+        <EntityType Name="Thuoc">
+          <Key>
+            <PropertyRef Name="MaThuoc" />
+          </Key>
+          <Property Name="MaThuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenThuoc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NuocSx" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DonGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HanSuDung" Type="DateTime" Precision="0" />
+          <Property Name="GhiChu" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChiTietToaThuocs" Relationship="QLPKTNModel.FK_ChiTietToaThuoc_Thuoc1" FromRole="Thuoc" ToRole="ChiTietToaThuoc" />
+          <Property Name="HinhAnh" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ToaThuoc">
+          <Key>
+            <PropertyRef Name="STT" />
+          </Key>
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="MaBenhNhan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BenhDuocChanDoan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NgayKham" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BenhNhan" Relationship="Self.fk_Mbn" FromRole="ToaThuoc" ToRole="BenhNhan" />
+          <NavigationProperty Name="ChiTietToaThuocs" Relationship="QLPKTNModel.FK_ChiTietToaThuoc_ToaThuoc1" FromRole="ToaThuoc" ToRole="ChiTietToaThuoc" />
+        </EntityType>
+        <Association Name="fk_Mbn">
+          <End Role="BenhNhan" Type="Self.BenhNhan" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ToaThuoc" Type="Self.ToaThuoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BenhNhan">
+              <PropertyRef Name="MaBenhNhan" />
+            </Principal>
+            <Dependent Role="ToaThuoc">
+              <PropertyRef Name="MaBenhNhan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLPKTNEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BenhNhans" EntityType="Self.BenhNhan" />
+          <EntitySet Name="Thuocs" EntityType="Self.Thuoc" />
+          <EntitySet Name="ToaThuocs" EntityType="Self.ToaThuoc" />
+          <AssociationSet Name="fk_Mbn" Association="Self.fk_Mbn">
+            <End Role="BenhNhan" EntitySet="BenhNhans" />
+            <End Role="ToaThuoc" EntitySet="ToaThuocs" />
+          </AssociationSet>
+          <EntitySet Name="TaiKhoans" EntityType="QLPKTNModel.TaiKhoan" />
+          <EntitySet Name="ChiTietToaThuocs" EntityType="QLPKTNModel.ChiTietToaThuoc" />
+          <AssociationSet Name="FK_ChiTietToaThuoc_Thuoc1" Association="QLPKTNModel.FK_ChiTietToaThuoc_Thuoc1">
+            <End Role="Thuoc" EntitySet="Thuocs" />
+            <End Role="ChiTietToaThuoc" EntitySet="ChiTietToaThuocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietToaThuoc_ToaThuoc1" Association="QLPKTNModel.FK_ChiTietToaThuoc_ToaThuoc1">
+            <End Role="ToaThuoc" EntitySet="ToaThuocs" />
+            <End Role="ChiTietToaThuoc" EntitySet="ChiTietToaThuocs" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenTk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mauk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ChiTietToaThuoc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="MaThuoc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SoLuong" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LieuDung" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Thuoc" Relationship="QLPKTNModel.FK_ChiTietToaThuoc_Thuoc1" FromRole="ChiTietToaThuoc" ToRole="Thuoc" />
+          <NavigationProperty Name="ToaThuoc" Relationship="QLPKTNModel.FK_ChiTietToaThuoc_ToaThuoc1" FromRole="ChiTietToaThuoc" ToRole="ToaThuoc" />
+        </EntityType>
+        <Association Name="FK_ChiTietToaThuoc_Thuoc1">
+          <End Type="QLPKTNModel.Thuoc" Role="Thuoc" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QLPKTNModel.ChiTietToaThuoc" Role="ChiTietToaThuoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thuoc">
+              <PropertyRef Name="MaThuoc" />
+            </Principal>
+            <Dependent Role="ChiTietToaThuoc">
+              <PropertyRef Name="MaThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietToaThuoc_ToaThuoc1">
+          <End Type="QLPKTNModel.ToaThuoc" Role="ToaThuoc" Multiplicity="1" />
+          <End Type="QLPKTNModel.ChiTietToaThuoc" Role="ChiTietToaThuoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToaThuoc">
+              <PropertyRef Name="STT" />
+            </Principal>
+            <Dependent Role="ChiTietToaThuoc">
+              <PropertyRef Name="STT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLPKTNModelStoreContainer" CdmEntityContainer="QLPKTNEntities">
+          <EntitySetMapping Name="BenhNhans">
+            <EntityTypeMapping TypeName="QLPKTNModel.BenhNhan">
+              <MappingFragment StoreEntitySet="BenhNhan">
+                <ScalarProperty Name="MaBenhNhan" ColumnName="MaBenhNhan" />
+                <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+                <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Thuocs">
+            <EntityTypeMapping TypeName="QLPKTNModel.Thuoc">
+              <MappingFragment StoreEntitySet="Thuoc">
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
+                <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
+                <ScalarProperty Name="NuocSx" ColumnName="NuocSx" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="HanSuDung" ColumnName="HanSuDung" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToaThuocs">
+            <EntityTypeMapping TypeName="QLPKTNModel.ToaThuoc">
+              <MappingFragment StoreEntitySet="ToaThuoc">
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="MaBenhNhan" ColumnName="MaBenhNhan" />
+                <ScalarProperty Name="BenhDuocChanDoan" ColumnName="BenhDuocChanDoan" />
+                <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaiKhoans">
+            <EntityTypeMapping TypeName="QLPKTNModel.TaiKhoan">
+              <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="Mauk" ColumnName="Mauk" />
+                <ScalarProperty Name="TenTk" ColumnName="TenTk" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietToaThuocs">
+            <EntityTypeMapping TypeName="QLPKTNModel.ChiTietToaThuoc">
+              <MappingFragment StoreEntitySet="ChiTietToaThuoc">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="LieuDung" ColumnName="LieuDung" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaThuoc" ColumnName="MaThuoc" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

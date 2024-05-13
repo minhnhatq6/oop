@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37504879f6444cb7b567ebd15386e5ae" Name="Diagram1">
+        <EntityTypeShape EntityType="QLPKTNModel.BenhNhan" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPKTNModel.Thuoc" Width="1.5" PointX="2.125" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPKTNModel.ToaThuoc" Width="1.5" PointX="3.5" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="QLPKTNModel.fk_Mbn" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QLPKTNModel.TaiKhoan" Width="1.5" PointX="5.375" PointY="8" />
+        <EntityTypeShape EntityType="QLPKTNModel.ChiTietToaThuoc" Width="1.5" PointX="6.375" PointY="1.375" />
+        <AssociationConnector Association="QLPKTNModel.FK_ChiTietToaThuoc_Thuoc1" />
+        <AssociationConnector Association="QLPKTNModel.FK_ChiTietToaThuoc_ToaThuoc1" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

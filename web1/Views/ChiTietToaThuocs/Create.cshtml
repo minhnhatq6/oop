@@ -1,0 +1,92 @@
+﻿@model web1.Models.ChiTietToaThuoc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thêm mới</title>
+</head>
+<body>
+    <h2> Thêm mới</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.STT, "STT", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("STT", null, htmlAttributes: new { @class = "select_page form-control" })
+                    @Html.ValidationMessageFor(model => model.STT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                &nbsp; &nbsp;Tên thuốc
+                <div class="col-md-10">
+                    @Html.DropDownList("MaThuoc", null, htmlAttributes: new { @class = "select_page form-control" })
+                    @Html.ValidationMessageFor(model => model.MaThuoc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LieuDung, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LieuDung, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.LieuDung, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GhiChu, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="btn btn-warning">
+        @Html.ActionLink("Quay lại", "Index")
+    </div>
+    @section Scripts {
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.select_page').select2({
+                });
+
+            });
+        </script>
+    }
+
+</body>
+</html>

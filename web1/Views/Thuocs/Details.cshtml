@@ -1,0 +1,79 @@
+﻿@model web1.Models.Thuoc
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaThuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaThuoc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenThuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenThuoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NuocSx)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NuocSx)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HanSuDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HanSuDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GhiChu)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </dt>
+
+        <dd>
+            <img src="~/HinhAnh/@Html.DisplayFor(model => model.HinhAnh)" style="height:450px;width:350px" />
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaThuoc }, new {@class= "btn btn-success "}) 
+</p>
+<div class="btn btn-warning">
+    @Html.ActionLink("Quay lại", "Index")
+
+</div>
